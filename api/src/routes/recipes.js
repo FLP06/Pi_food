@@ -1,4 +1,4 @@
-const {getRecipeByName, getRecipeById} = require("../controllers/getRecipe.");
+const {getRecipeByName, getRecipeById} = require("../controllers/getRecipes");
 const postRecipe = require("../controllers/postRecipe.js");
 const deleteRecipe = require('../controllers/deleteRecipe.js');
 const router = require(".");

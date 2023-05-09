@@ -10,8 +10,6 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-// router.use('/recipes', (req,re)); // contiene todas las rutas de recipes
-// // router.use('/diet', diet); // todas las rutas de Diet
 
 
 router.get('/', async (req, res) => { 
@@ -50,6 +48,8 @@ router.get('/all', async (req, res) => { /* listar todas las dietas y buscar por
     res.status(200).send(recipeTotal);
   }
 });
+
+
 
 
 module.exports = router;

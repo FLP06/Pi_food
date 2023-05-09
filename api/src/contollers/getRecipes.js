@@ -39,7 +39,7 @@ getRecipeByName = async ()=>{
 
             let recipesApi = !!name? results.filter(recipe => recipe.title.toLowerCase().includes(name.toLowerCase())) :results;
 
-            //  // //Objeto con las receta y con las propiedades necesarias
+            //  // //Objeto con las recetas y con las propiedades necesarias
             recipesApi = recipesApi.map((recipe) => reduceObjectsRecipes(recipe))
 
             let recipesDB = await Recipe.findAll({
@@ -71,6 +71,7 @@ getRecipeByName = async ()=>{
 getRecipeById = async(req,res)=>{
 
     const { id } = req.params
+    
 
     try {
         if (id === undefined) return res.status(404).send("no hay ID");
@@ -78,7 +79,7 @@ getRecipeById = async(req,res)=>{
         if (!id.includes("-")) {
 
             const recipeApi = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
-                .then(elemt => elemt.data);
+            .then(elemt => elemt.data);
 
             if (recipeApi.hasOwnProperty('id')) return res.json(reduceObjectsRecipes(recipeApi));
 
