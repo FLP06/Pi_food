@@ -12,20 +12,18 @@ module.exports = async (req, res) => {
         const newRecipe = await Recipe.create({name: name.toLowerCase(),
 
         [(/^.+.*\.(jpg|JPG|bmp|BMP|gif|GIF|tif|TIF|png|PNG)$/.test(image))? "image" : null]: image,
-
+        
         summary,
         healthScore,
         steps
         });
 
         const dietsToAdd = await Diet.findAll({ where:{ 
-
-        name:{
-        [Op.in]: diets? diets : []
-
-        }
-        }
-        });
+                            name:{
+                                [Op.in]: diets? diets : []
+                                }
+                            }
+                        });
 
         await newRecipe.addDiets(dietsToAdd); 
 

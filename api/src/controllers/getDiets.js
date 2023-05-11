@@ -9,9 +9,9 @@ module.exports = async (req, res) => {
         return res.json(diets);
         
     } 
-    catch (error) {
+    catch (err) {
 
-        return res.json(error)
+        return res.json(err)
     
     }
 }

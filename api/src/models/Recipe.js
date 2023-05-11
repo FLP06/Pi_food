@@ -4,39 +4,45 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Recipe', {
-    id:{                             // id, name, summary, healthScore, createIndb
-      type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
+
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
     },
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {notEmpty: true}
     },
-    summary: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    healthScore:{
-      type: DataTypes.INTEGER,
-        validate: {
-          min: 0,
-          max: 100,
-        }, 
-    },
-    createIndb: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
+
     image: {
       type: DataTypes.STRING,
-      allowNull: true,
+      defaultValue: "https://i.postimg.cc/t4F6nM5b/324.png",
+      validate: {isUrl: true}
     },
-    stepbyStep:{
-      type: DataTypes.ARRAY(DataTypes.TEXT),
+
+    summary: {
+      type: DataTypes.TEXT,
+      allowNull: false
     },
-    
-  }, { timestamps: false });
+
+    healthScore: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+      validate: {min: 0, max: 100}
+    },
+
+    steps: {
+      type: DataTypes.JSON,
+      defaultValue: {}
+    }
+
+  },
+  {
+    timestamps: false
+  });
 };
