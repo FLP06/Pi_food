@@ -28,25 +28,36 @@
 //   });
 // });
 
-const server = require('./src/app.js');
-const { conn, Diet } = require('./src/db.js');
+// const server = require('./src/app.js');
+// const { conn, Diet } = require('./src/db.js');
 
-const typesOfDiets = ["dairy free",
-                      "fodmap friendly",
-                      "gluten free",
-                      "ketogenic",
-                      "lacto ovo vegetarian",
-                      "paleolithic",
-                      "pescetarian",
-                      "primal",
-                      "vegan",
-                      "whole 30"]
+// const typesOfDiets = ["dairy free",
+//                       "fodmap friendly",
+//                       "gluten free",
+//                       "ketogenic",
+//                       "lacto ovo vegetarian",
+//                       "paleolithic",
+//                       "pescetarian",
+//                       "primal",
+//                       "vegan",
+//                       "whole 30"]
 
 // Syncing all the models at once.
-conn.sync({ force: false })
-    .then(() => {
-      server.listen(process.env.PORT, () => {
-          console.log('%s listening at 3001'); // eslint-disable-line no-console
-          typesOfDiets.map((type) => Diet.findOrCreate({where: {name: type}}))
-        });
-    });
+// conn.sync({ force: false })
+//     .then(() => {
+//       server.listen(process.env.PORT, () => {
+//           console.log('%s listening at 3001'); // eslint-disable-line no-console
+//           typesOfDiets.map((type) => Diet.findOrCreate({where: {name: type}}))
+//         });
+//     });
+
+const server = require('./src/app');
+const { conn } = require('./src/db');
+
+// Syncing all the models at once.
+conn.sync({ force: true }).then(() => {
+  console.log('DB conectada, master')
+  server.listen(3001, () => {
+    console.log('Server on port 3001'); // eslint-disable-line no-console
+  });
+});

@@ -13,7 +13,9 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
+//http://locahost:3001/recipes o diets;
 router.use('/recipes', recipes);
+
 router.use('/diets', diets);
 
 
